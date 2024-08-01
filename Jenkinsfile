@@ -1,9 +1,12 @@
 pipeline {
    agent any
 
-   tools {
+   // tools {
       // Install the Maven version configured as "M3" and add it to the path.
-      maven "M3"
+      // maven "M3"
+     tools {
+        maven 'M3' // Ensure 'M3' matches the name configured in Jenkins
+    // }
    }
 
    stages {
