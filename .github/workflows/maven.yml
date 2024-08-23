@@ -44,3 +44,4 @@ jobs:
         git add .
         git commit -m "Add built JAR/WAR file"
         git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/manjugdr/maven-simple.git artifacts --force
+
