@@ -31,10 +31,11 @@ jobs:
       run: |
         mkdir -p artifacts
         cp target/*.jar artifacts/ || cp target/*.war artifacts/
-      # The above command copies the generated JAR or WAR to the 'artifacts' directory
 
     - name: Commit and Push JAR/WAR
       if: success()
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         git config --local user.email "manjug.dr@gmail.com"
         git config --local user.name "manjugdr"
@@ -42,4 +43,4 @@ jobs:
         cp -R artifacts/* .
         git add .
         git commit -m "Add built JAR/WAR file"
-        git push origin artifacts --force
+        git push https://x-access-token:${{ secrets.TEST_1 }}@github.com/manjugdr/maven-simple.git artifacts --force
