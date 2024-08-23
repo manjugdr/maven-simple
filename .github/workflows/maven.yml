@@ -1,4 +1,4 @@
-name: Java CI
+name: Java CI and Deploy
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -26,3 +25,21 @@ jobs:
 
     - name: Run Tests
       run: mvn test
+
+    - name: Archive JAR/WAR
+      if: success()
+      run: |
+        mkdir -p artifacts
+        cp target/*.jar artifacts/ || cp target/*.war artifacts/
+      # The above command copies the generated JAR or WAR to the 'artifacts' directory
+
+    - name: Commit and Push JAR/WAR
+      if: success()
+      run: |
+        git config --local user.email "manjug.dr@gmail.com"
+        git config --local user.name "manjugdr"
+        git checkout -b artifacts || git checkout artifacts
+        cp -R artifacts/* .
+        git add .
+        git commit -m "Add built JAR/WAR file"
+        git push origin artifacts --force
