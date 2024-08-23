@@ -35,7 +35,7 @@ jobs:
     - name: Commit and Push JAR/WAR
       if: success()
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.TEST_1 }}
       run: |
         git config --local user.email "manjug.dr@gmail.com"
         git config --local user.name "manjugdr"
@@ -43,4 +43,4 @@ jobs:
         cp -R artifacts/* .
         git add .
         git commit -m "Add built JAR/WAR file"
-        git push https://x-access-token:${{ secrets.TEST_1 }}@github.com/manjugdr/maven-simple.git artifacts --force
+        git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/manjugdr/maven-simple.git artifacts --force
